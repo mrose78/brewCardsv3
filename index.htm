@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>brewCards POC</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+    function getBeer(BeerID){
+       $.get("https://api.mlab.com/api/1/databases/brewcards/collections/checkins?q={'x':" + BeerID + "}&apiKey=64PRNb9l5JdAW-CbTqJ2Kwrj0UtTRT3Q", function(data, status){
+                alert("Data: " + JSON.stringify(data) + "\nStatus: " + status);
+            }).fail(function(){
+                alert("fail");
+            });
+    }
+
+    function addBeer(beerID){
+        $.ajax( { url: "https://api.mlab.com/api/1/databases/brewcards/collections/checkins?apiKey=64PRNb9l5JdAW-CbTqJ2Kwrj0UtTRT3Q",
+		  data: JSON.stringify( { "x" : beerID } ),
+		  type: "POST",
+		  contentType: "application/json" } );
+    }
+
+</script>
+
+</head>
+<body>
+
+<div id="div1"></div>
+
+<button id="addBeer" onclick="addBeer('55')">Add a record</button>
+
+<button id="getBeer" onclick="getBeer('1')">Get a record</button>
+
+</body>
+</html>
